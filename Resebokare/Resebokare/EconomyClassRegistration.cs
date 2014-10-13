@@ -17,7 +17,7 @@ namespace ReseBokare
 		{
 			return _list;
 		}
-
+		
 		public override int ListCounter()
 		{
 			return _listCounter;
