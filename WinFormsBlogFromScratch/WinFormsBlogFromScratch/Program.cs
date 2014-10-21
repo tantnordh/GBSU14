@@ -14,9 +14,11 @@ namespace WinFormsBlogFromScratch
 		[STAThread]
 		static void Main()
 		{
+			BlogManager blogManager = new BlogManager();
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Application.Run(new FormStart(blogManager));
 		}
 	}
 }

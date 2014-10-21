@@ -10,13 +10,19 @@ using System.Windows.Forms;
 
 namespace WinFormsBlogFromScratch
 {
-	public partial class Form1 : Form
+	public partial class FormCreateNewBlog : Form
 	{
-		public Form1()
+		public FormCreateNewBlog()
 		{
 			InitializeComponent();
-
-
 		}
+
+		private void btnSaveNewBlog_Click(object sender, EventArgs e)
+		{
+			FormStart.BlogManager.CreateBlog(txtBoxNewBlogName.Text);
+			this.Close();
+		}
+
+
 	}
 }
