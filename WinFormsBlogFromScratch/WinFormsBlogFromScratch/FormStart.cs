@@ -17,22 +17,29 @@ namespace WinFormsBlogFromScratch
 		public FormStart(BlogManager blogmanager)
 		{
 			InitializeComponent();
-
 			BlogManager = blogmanager;
+			LoadData();
+		}
 
-			comboBoxBlogs.DataSource = blogmanager.GetBlogs();
-			comboBoxBlogs.DisplayMember = "Title";
+		private void LoadData()
+		{
+			comboBoxBlogs.DataSource = null;
+			comboBoxBlogs.DisplayMember = "Name";
+			comboBoxBlogs.DataSource = BlogManager.GetBlogs();
 		}
 
 		private void btnNewBlog_Click(object sender, EventArgs e)
 		{
 			var createNewBlog = new FormCreateNewBlog();
-			createNewBlog.ShowDialog();
+			if (createNewBlog.ShowDialog() == DialogResult.Cancel)
+				LoadData();
 		}
 
 		private void btnGoToBlog_Click(object sender, EventArgs e)
 		{
-
+			Blog chosenBlog = BlogManager.GetBlogs().Single(b => b.Name == comboBoxBlogs.Text);
+			var enterBlog = new FormMenu(chosenBlog);
+			enterBlog.ShowDialog();
 		}
 	}
 }

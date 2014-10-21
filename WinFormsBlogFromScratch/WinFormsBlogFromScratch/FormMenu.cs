@@ -10,17 +10,20 @@ using System.Windows.Forms;
 
 namespace WinFormsBlogFromScratch
 {
-	public partial class FormCreateNewBlog : Form
+	public partial class FormMenu : Form
 	{
-		public FormCreateNewBlog()
+		public FormMenu(Blog blog)
 		{
-			InitializeComponent();
+			InitializeComponent(blog.Name);
+			BlogManager = blogmanager;
+			LoadData();
+
 		}
 
-		private void btnSaveNewBlog_Click(object sender, EventArgs e)
+		private void LoadData()
 		{
-			FormStart.BlogManager.CreateBlog(txtBoxNewBlogName.Text);
-			this.Close();
+			dataGridViewPosts.DataSource = null;
+			comboBoxBlogs.DataSource = BlogManager.GetBlogs();
 		}
 	}
 }

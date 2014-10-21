@@ -10,9 +10,11 @@ namespace WinFormsBlogFromScratch
 	{
 		public string Name { get; set; }
 		public List<Post> Posts { get; set; }
+		public int Id { get; set; }
 
-		public Blog(string name)
+		public Blog(int id, string name)
 		{
+			Id = id;
 			Name = name;
 			Posts = new List<Post>();
 		}
