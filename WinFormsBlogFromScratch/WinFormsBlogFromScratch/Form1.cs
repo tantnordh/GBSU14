@@ -15,6 +15,8 @@ namespace WinFormsBlogFromScratch
 		public Form1()
 		{
 			InitializeComponent();
+
+
 		}
 	}
 }

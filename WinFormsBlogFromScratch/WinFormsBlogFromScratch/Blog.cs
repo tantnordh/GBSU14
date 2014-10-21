@@ -4,20 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsBlog
+namespace WinFormsBlogFromScratch
 {
-	[Serializable]
 	public class Blog
 	{
-		public string xmlFileName = "log.xml";
-
-		public List<Post> Posts { get; set; }
 		public string Name { get; set; }
-		//Det behövs en tom konstruktor för att xml:en ska fungera
-		public Blog()
-		{
+		public List<Post> Posts { get; set; }
 
-		}
 		public Blog(string name)
 		{
 			Name = name;
