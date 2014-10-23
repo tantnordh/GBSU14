@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsSebDemo
+namespace CodeCollection
 {
-	public enum Day : int
+	public enum Dag: int
 	{
 		Monday = 0,
 		Tuesday = 2,
@@ -15,13 +15,5 @@ namespace WinFormsSebDemo
 		Friday = 8,
 		Saturday = 10,
 		Sunday = 12
-	}
-
-	class Class1
-	{
-		public Class1()
-		{
-			Day day = Day.Monday;
-		}
 	}
 }

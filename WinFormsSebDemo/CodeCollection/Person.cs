@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsSebDemo
+namespace CodeCollection
 {
 	public class Person
 	{
@@ -17,5 +17,4 @@ namespace WinFormsSebDemo
 			Age = age;
 		}
 	}
-
 }

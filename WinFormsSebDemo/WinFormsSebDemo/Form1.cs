@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeCollection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,15 +17,15 @@ namespace WinFormsSebDemo
 		{
 			InitializeComponent();
 
-			List<Day> dagar = new List<Day>()
+			List<Dag> dagar = new List<CodeCollection.Dag>()
 			{
-				Day.Monday,
-				Day.Tuesday,
-				Day.Wednesday,
-				Day.Thursday,
-				Day.Friday,
-				Day.Saturday,
-				Day.Sunday
+				Dag.Monday,
+				Dag.Tuesday,
+				Dag.Wednesday,
+				Dag.Thursday,
+				Dag.Friday,
+				Dag.Saturday,
+				Dag.Sunday
 			};
 
 			comboBox1.DataSource = dagar;
@@ -96,7 +97,7 @@ namespace WinFormsSebDemo
 
 			if (box != null)
 			{
-				Day dagen = (Day)box.SelectedItem;
+				Dag dagen = (Dag)box.SelectedItem;
 
 				label1.Text = dagen + " - " + (int)dagen;
 			}
