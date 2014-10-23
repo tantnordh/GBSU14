@@ -16,7 +16,14 @@ namespace WinFormsSebDemo
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+
+			YesNoForm yesNo = new YesNoForm();
+			DialogResult resultat = yesNo.ShowDialog();
+
+			if (resultat == DialogResult.Yes)
+			{
+				Application.Run(new Form1());
+			}
 		}
 	}
 }
