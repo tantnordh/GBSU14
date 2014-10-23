@@ -15,13 +15,34 @@ namespace WinFormsSebDemo
 		public Form1()
 		{
 			InitializeComponent();
+
+			List<Day> dagar = new List<Day>()
+			{
+				Day.Monday,
+				Day.Tuesday,
+				Day.Wednesday,
+				Day.Thursday,
+				Day.Friday,
+				Day.Saturday,
+				Day.Sunday
+			};
+
+			comboBox1.DataSource = dagar;
+			listBox1.DataSource = dagar;
+
+			dataGridView1.DataSource = new List<Person>
+			{
+				new Person("Erik", 12),
+				new Person("Göran", 19),
+				new Person("Knud", 29),
+				new Person("Mats", 39),
+				new Person("Sven", 22)
+			};
 		}
 
 		private void KnappKlick(object sender, EventArgs e)
 		{
-			//Control button = sender as Control;
 			Button button = sender as Button;
-			//(sender as Button) samma sak som ovan, typ
 
 			button.Text = "KNAPP";
 			txtTextRuta.Text = "Knappklick";
@@ -58,24 +79,27 @@ namespace WinFormsSebDemo
 
 		private void RadioClick(object sender, EventArgs e)
 		{
-			RadioButton radBut = sender as RadioButton;
-
-			if (radBut.Checked)
-			{
-				radBut.Checked = false;
-			}
 		}
 
 		private void RadioMouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-
+				RadioButton radBut = sender as RadioButton;
+				radBut.Checked = false;
 			}
-
-			RadioButton radBut = sender as RadioButton;
 		}
 
+		private void ComboBoxSelectionChanged(object sender, EventArgs e)
+		{
+			ComboBox box = sender as ComboBox;
 
+			if (box != null)
+			{
+				Day dagen = (Day)box.SelectedItem;
+
+				label1.Text = dagen + " - " + (int)dagen;
+			}
+		}
 	}
 }
