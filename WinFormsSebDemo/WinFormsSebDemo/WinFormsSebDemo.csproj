@@ -58,12 +58,6 @@
     <Compile Include="YesNoForm.Designer.cs">
       <DependentUpon>YesNoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="YesOrNo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="YesOrNo.Designer.cs">
-      <DependentUpon>YesOrNo.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,9 +72,6 @@
     </Compile>
     <EmbeddedResource Include="YesNoForm.resx">
       <DependentUpon>YesNoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="YesOrNo.resx">
-      <DependentUpon>YesOrNo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
