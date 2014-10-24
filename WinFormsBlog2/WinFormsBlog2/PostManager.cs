@@ -27,12 +27,6 @@ namespace WinFormsBlog2
 			_id++;
 		}
 
-		public PostManager()
-		{
-			_id = 1;
-			Posts = new List<Post>();
-		}
-
 		public void PrintSinglePost(RichTextBox richTextBox1, Post post)
 		{
 			string tags = GetTags(post);
@@ -46,9 +40,10 @@ namespace WinFormsBlog2
 
 		private void PrintComments(Post post, RichTextBox richTextBox)
 		{
-			string comments = "Comments";
+			string comments = "Kommentarer (" + post.Comments.Count + ")";
 			if (post.Comments.Count > 0)
 			{
+				richTextBox.AppendText(Environment.NewLine);
 				comments.PrintSubTitle(richTextBox);
 			}
 
@@ -56,15 +51,14 @@ namespace WinFormsBlog2
 			for (int i = 0; i < orderedComments.Count; i++)
 			{
 				string info = SetCommentInfo(orderedComments[i]);
-				info.PrintBodyText(richTextBox);
+				info.PrintPostInfo(richTextBox);
 				orderedComments[i].Text.PrintBodyText(richTextBox);
-				richTextBox.AppendText(Environment.NewLine);
 			}
 		}
 
 		private string SetCommentInfo(Comment comment)
 		{
-			return "Datum: " + comment.Date.ToShortDateString() + " | Namn: " + comment.Name;
+			return comment.Id + ". Datum: " + comment.Date.ToShortDateString() + " | Namn: " + comment.Name;
 		}
 
 		private static string SetPostInfo(Post post, string tags)
@@ -97,7 +91,6 @@ namespace WinFormsBlog2
 			}
 			return tags;
 		}
-		
 
 		public void PrintPosts(RichTextBox richTextBox1, List<Post> posts)
 		{
@@ -107,6 +100,18 @@ namespace WinFormsBlog2
 				posts[i].Text.PrintBodyText(richTextBox1);
 				richTextBox1.AppendText(Environment.NewLine);
 			}
+		}
+
+		public PostManager()
+		{
+			_id = 1;
+			Posts = new List<Post>();
+		}
+
+		public void DeletePost()
+		{
+			Posts = Posts.Where(p => p != SelectedPost).ToList();
+			SelectedPost = null;
 		}
 	}
 }

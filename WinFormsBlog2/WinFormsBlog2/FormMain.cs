@@ -29,17 +29,18 @@ namespace WinFormsBlog2
 
 		private void btnCreate_Click(object sender, EventArgs e)
 		{
-			richTextBox1.Clear();
 			RevealPostCreation();
 		}
 
 		private void btnStart_Click(object sender, EventArgs e)
 		{
+			ConcealExtras();
 			PrintPosts(_postManager.Posts);
 		}
 
 		private void btnShowSingle_Click(object sender, EventArgs e)
 		{
+			ConcealExtras();
 			_postManager.SelectedPost = (Post) comboBoxTitles.SelectedItem;
 			PrintPost(_postManager.SelectedPost);
 		}
@@ -49,8 +50,9 @@ namespace WinFormsBlog2
 			var commentForm = new FormComment(_postManager.SelectedPost, _commentManager);
 			commentForm.ShowDialog();
 
-			richTextBox1.Clear();
-			_postManager.PrintSinglePost(richTextBox1, _postManager.SelectedPost);
+			mainBox.Clear();
+			ConcealPostEdit();
+			_postManager.PrintSinglePost(mainBox, _postManager.SelectedPost);
 		}
 
 		private void btnQuit_Click(object sender, EventArgs e)
@@ -60,6 +62,8 @@ namespace WinFormsBlog2
 
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
+			ConcealExtras();
+
 			if (comboBoxSearch.SelectedIndex == 0)
 			{
 				txtSearch.Text = "Du har inte valt sökmetod.";
@@ -84,9 +88,40 @@ namespace WinFormsBlog2
 		private void btnSavePost_Click(object sender, EventArgs e)
 		{
 			ConcealPostCreation();
-			_postManager.CreatePost(txtRubrik.Text, txtBodyText.Text, txtTags.Text);
+			_postManager.CreatePost(txtTitle.Text, txtBodyText.Text, txtTags.Text);
 			PrintPost(_postManager.SelectedPost);
 			LoadComboBoxTitles();
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+			RevealPostEdit();
+		}
+
+		private void btnSaveChanges_Click(object sender, EventArgs e)
+		{
+			_postManager.SelectedPost.Title = txtTitle.Text;
+			_postManager.SelectedPost.Text = txtBodyText.Text;
+			_postManager.SelectedPost.Tags = new List<string>(txtTags.Text.Split(','));
+
+			ConcealPostEdit();
+			PrintPost(_postManager.SelectedPost);
+			LoadComboBoxTitles();
+		}
+
+		private void btnDelete_Click(object sender, EventArgs e)
+		{
+			_postManager.DeletePost();
+			mainBox.Clear();
+			ConcealButtons();
+			LoadComboBoxTitles();
+		}
+
+		private void LoadComboBoxTitles()
+		{
+			comboBoxTitles.DataSource = null;
+			comboBoxTitles.DataSource = _postManager.Posts;
+			comboBoxTitles.DisplayMember = "Title";
 		}
 
 		private void comboBoxSearch_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,23 +144,17 @@ namespace WinFormsBlog2
 			}
 		}
 
-		private void LoadComboBoxTitles()
-		{
-			comboBoxTitles.DataSource = _postManager.Posts;
-			comboBoxTitles.DisplayMember = "Title";
-		}
-
 		private void PrintPost(Post post)
 		{
-			richTextBox1.Clear();
-			_postManager.PrintSinglePost(richTextBox1, post);
+			mainBox.Clear();
+			_postManager.PrintSinglePost(mainBox, post);
 			RevealButtons();
 		}
 
 		private void PrintPosts(List<Post> posts)
 		{
-			richTextBox1.Clear();
-			_postManager.PrintPosts(richTextBox1, posts);
+			mainBox.Clear();
+			_postManager.PrintPosts(mainBox, posts);
 			ConcealButtons();
 		}
 
@@ -134,7 +163,7 @@ namespace WinFormsBlog2
 			if (foundPosts.Count == 0)
 			{
 				string text = "Din sökning gav ingen träff.";
-				text.PrintBodyText(richTextBox1);
+				text.PrintBodyText(mainBox);
 				ConcealButtons();
 			}
 			else if (foundPosts.Count == 1)
@@ -148,22 +177,50 @@ namespace WinFormsBlog2
 			}
 		}
 
+		private void ConcealExtras()
+		{
+			ConcealPostEdit();
+			ConcealPostCreation();
+		}
+
 		private void ConcealPostCreation()
 		{
-			txtRubrik.Visible = false;
+			txtTitle.Visible = false;
 			txtBodyText.Visible = false;
 			txtTags.Visible = false;
 			btnSavePost.Visible = false;
+			btnCreate.Visible = true;
 		}
 
 		private void RevealPostCreation()
 		{
-			txtRubrik.Visible = true;
+			mainBox.Clear();
+			txtTitle.Visible = true;
 			txtBodyText.Visible = true;
 			txtTags.Visible = true;
+			btnCreate.Visible = false;
 			btnSavePost.Visible = true;
 
 			ConcealButtons();
+		}
+
+		private void ConcealPostEdit()
+		{
+			txtTitle.Visible = false;
+			txtBodyText.Visible = false;
+			txtTags.Visible = false;
+			btnSaveChanges.Visible = false;
+			btnEdit.Visible = true;
+		}
+
+		private void RevealPostEdit()
+		{
+			mainBox.Clear();
+			txtTitle.Visible = true;
+			txtBodyText.Visible = true;
+			txtTags.Visible = true;
+			btnEdit.Visible = false;
+			btnSaveChanges.Visible = true;
 		}
 
 		private void ConcealButtons()

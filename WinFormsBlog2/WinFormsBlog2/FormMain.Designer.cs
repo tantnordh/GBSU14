@@ -35,16 +35,18 @@
 			this.btnComment = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.mainBox = new System.Windows.Forms.RichTextBox();
 			this.comboBoxSearch = new System.Windows.Forms.ComboBox();
 			this.btnQuit = new System.Windows.Forms.Button();
 			this.txtSearch = new System.Windows.Forms.TextBox();
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.comboBoxTitles = new System.Windows.Forms.ComboBox();
-			this.txtRubrik = new System.Windows.Forms.TextBox();
+			this.txtTitle = new System.Windows.Forms.TextBox();
 			this.txtTags = new System.Windows.Forms.TextBox();
 			this.txtBodyText = new System.Windows.Forms.TextBox();
 			this.btnSavePost = new System.Windows.Forms.Button();
+			this.btnSaveChanges = new System.Windows.Forms.Button();
+			this.backgroundBox = new System.Windows.Forms.RichTextBox();
 			this.SuspendLayout();
 			// 
 			// btnBlogTitle
@@ -60,7 +62,7 @@
 			this.btnBlogTitle.Name = "btnBlogTitle";
 			this.btnBlogTitle.Size = new System.Drawing.Size(250, 62);
 			this.btnBlogTitle.TabIndex = 0;
-			this.btnBlogTitle.Text = "Tant Nordh";
+			this.btnBlogTitle.Text = "Bloggtitel";
 			this.btnBlogTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnBlogTitle.UseVisualStyleBackColor = false;
 			// 
@@ -115,6 +117,7 @@
 			this.btnEdit.Text = "Uppdatera";
 			this.btnEdit.UseVisualStyleBackColor = true;
 			this.btnEdit.Visible = false;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
 			// btnDelete
 			// 
@@ -125,20 +128,21 @@
 			this.btnDelete.Text = "Radera";
 			this.btnDelete.UseVisualStyleBackColor = true;
 			this.btnDelete.Visible = false;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
-			// richTextBox1
+			// mainBox
 			// 
-			this.richTextBox1.BackColor = System.Drawing.Color.White;
-			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.richTextBox1.Location = new System.Drawing.Point(300, 0);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.ReadOnly = true;
-			this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.richTextBox1.Size = new System.Drawing.Size(600, 650);
-			this.richTextBox1.TabIndex = 8;
-			this.richTextBox1.TabStop = false;
-			this.richTextBox1.Text = "";
-			this.richTextBox1.Enter += new System.EventHandler(this.ShiftFocus);
+			this.mainBox.BackColor = System.Drawing.Color.White;
+			this.mainBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.mainBox.Location = new System.Drawing.Point(335, 23);
+			this.mainBox.Name = "mainBox";
+			this.mainBox.ReadOnly = true;
+			this.mainBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+			this.mainBox.Size = new System.Drawing.Size(500, 595);
+			this.mainBox.TabIndex = 8;
+			this.mainBox.TabStop = false;
+			this.mainBox.Text = "";
+			this.mainBox.Enter += new System.EventHandler(this.ShiftFocus);
 			// 
 			// comboBoxSearch
 			// 
@@ -184,32 +188,32 @@
 			this.comboBoxTitles.Size = new System.Drawing.Size(154, 21);
 			this.comboBoxTitles.TabIndex = 13;
 			// 
-			// txtRubrik
+			// txtTitle
 			// 
-			this.txtRubrik.Location = new System.Drawing.Point(335, 23);
-			this.txtRubrik.Name = "txtRubrik";
-			this.txtRubrik.Size = new System.Drawing.Size(425, 20);
-			this.txtRubrik.TabIndex = 14;
-			this.txtRubrik.Text = "Rubrik";
-			this.txtRubrik.Visible = false;
+			this.txtTitle.Location = new System.Drawing.Point(335, 41);
+			this.txtTitle.Name = "txtTitle";
+			this.txtTitle.Size = new System.Drawing.Size(425, 20);
+			this.txtTitle.TabIndex = 14;
+			this.txtTitle.Text = "Rubrik";
+			this.txtTitle.Visible = false;
 			// 
 			// txtTags
 			// 
-			this.txtTags.Location = new System.Drawing.Point(335, 528);
+			this.txtTags.Location = new System.Drawing.Point(335, 539);
 			this.txtTags.Name = "txtTags";
 			this.txtTags.Size = new System.Drawing.Size(425, 20);
-			this.txtTags.TabIndex = 15;
-			this.txtTags.Text = "Rubrik";
+			this.txtTags.TabIndex = 16;
+			this.txtTags.Text = "Taggar, separera med komma";
 			this.txtTags.Visible = false;
 			// 
 			// txtBodyText
 			// 
-			this.txtBodyText.Location = new System.Drawing.Point(335, 56);
+			this.txtBodyText.Location = new System.Drawing.Point(335, 67);
 			this.txtBodyText.Multiline = true;
 			this.txtBodyText.Name = "txtBodyText";
 			this.txtBodyText.Size = new System.Drawing.Size(425, 466);
-			this.txtBodyText.TabIndex = 16;
-			this.txtBodyText.Text = "Rubrik";
+			this.txtBodyText.TabIndex = 15;
+			this.txtBodyText.Text = "Text";
 			this.txtBodyText.Visible = false;
 			// 
 			// btnSavePost
@@ -217,7 +221,7 @@
 			this.btnSavePost.BackColor = System.Drawing.SystemColors.ButtonFace;
 			this.btnSavePost.FlatAppearance.BorderColor = System.Drawing.SystemColors.ButtonShadow;
 			this.btnSavePost.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.btnSavePost.Location = new System.Drawing.Point(40, 286);
+			this.btnSavePost.Location = new System.Drawing.Point(40, 257);
 			this.btnSavePost.Name = "btnSavePost";
 			this.btnSavePost.Size = new System.Drawing.Size(128, 23);
 			this.btnSavePost.TabIndex = 17;
@@ -226,22 +230,47 @@
 			this.btnSavePost.Visible = false;
 			this.btnSavePost.Click += new System.EventHandler(this.btnSavePost_Click);
 			// 
+			// btnSaveChanges
+			// 
+			this.btnSaveChanges.Location = new System.Drawing.Point(40, 315);
+			this.btnSaveChanges.Name = "btnSaveChanges";
+			this.btnSaveChanges.Size = new System.Drawing.Size(128, 23);
+			this.btnSaveChanges.TabIndex = 18;
+			this.btnSaveChanges.Text = "Spara ändringar";
+			this.btnSaveChanges.UseVisualStyleBackColor = true;
+			this.btnSaveChanges.Visible = false;
+			this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
+			// 
+			// backgroundBox
+			// 
+			this.backgroundBox.BackColor = System.Drawing.Color.White;
+			this.backgroundBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.backgroundBox.Location = new System.Drawing.Point(300, 0);
+			this.backgroundBox.Name = "backgroundBox";
+			this.backgroundBox.ReadOnly = true;
+			this.backgroundBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+			this.backgroundBox.Size = new System.Drawing.Size(600, 650);
+			this.backgroundBox.TabIndex = 19;
+			this.backgroundBox.TabStop = false;
+			this.backgroundBox.Text = "";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.PaleVioletRed;
 			this.ClientSize = new System.Drawing.Size(900, 650);
+			this.Controls.Add(this.btnSaveChanges);
 			this.Controls.Add(this.btnSavePost);
 			this.Controls.Add(this.txtBodyText);
 			this.Controls.Add(this.txtTags);
-			this.Controls.Add(this.txtRubrik);
+			this.Controls.Add(this.txtTitle);
 			this.Controls.Add(this.comboBoxTitles);
 			this.Controls.Add(this.btnSearch);
 			this.Controls.Add(this.txtSearch);
 			this.Controls.Add(this.btnQuit);
 			this.Controls.Add(this.comboBoxSearch);
-			this.Controls.Add(this.richTextBox1);
+			this.Controls.Add(this.mainBox);
 			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.btnEdit);
 			this.Controls.Add(this.btnComment);
@@ -249,6 +278,7 @@
 			this.Controls.Add(this.btnStart);
 			this.Controls.Add(this.btnCreate);
 			this.Controls.Add(this.btnBlogTitle);
+			this.Controls.Add(this.backgroundBox);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "FormMain";
 			this.Padding = new System.Windows.Forms.Padding(20, 20, 0, 0);
@@ -267,16 +297,18 @@
 		private System.Windows.Forms.Button btnComment;
 		private System.Windows.Forms.Button btnEdit;
 		private System.Windows.Forms.Button btnDelete;
-		private System.Windows.Forms.RichTextBox richTextBox1;
+		private System.Windows.Forms.RichTextBox mainBox;
 		private System.Windows.Forms.ComboBox comboBoxSearch;
 		private System.Windows.Forms.Button btnQuit;
 		private System.Windows.Forms.TextBox txtSearch;
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.ComboBox comboBoxTitles;
-		private System.Windows.Forms.TextBox txtRubrik;
+		private System.Windows.Forms.TextBox txtTitle;
 		private System.Windows.Forms.TextBox txtTags;
 		private System.Windows.Forms.TextBox txtBodyText;
 		private System.Windows.Forms.Button btnSavePost;
+		private System.Windows.Forms.Button btnSaveChanges;
+		private System.Windows.Forms.RichTextBox backgroundBox;
 
 	}
 }

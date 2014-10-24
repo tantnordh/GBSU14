@@ -20,7 +20,7 @@ namespace WinFormsBlog2
 
 		public static void PrintSubTitle(this string text, RichTextBox richTextBox)
 		{
-			richTextBox.SelectionFont = new Font("Sitka Heading", 18f, FontStyle.Regular);
+			richTextBox.SelectionFont = new Font("Sitka Heading", 14f, FontStyle.Regular);
 			richTextBox.SelectionColor = Color.DarkMagenta;
 			richTextBox.AppendText(text);
 			richTextBox.AppendText(Environment.NewLine);
