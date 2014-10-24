@@ -76,7 +76,7 @@ namespace WinFormsBlog2
 			return info;
 		}
 
-		private static string GetTags(Post post)
+		public string GetTags(Post post)
 		{
 			string tags = string.Empty;
 			if (post.Tags != null)

@@ -10,7 +10,7 @@ namespace WinFormsBlog2
 	{
 		public static List<Post> SearchByTitle(this List<Post> posts, string title)
 		{
-			return posts.Where(p => p.Title == title).ToList();
+			return posts.Where(p => p.Title.ToLower().Contains(title.ToLower())).ToList();
 		}
 
 		public static List<Post> SearchByDate(this List<Post> posts, string date)

@@ -253,6 +253,7 @@
 			this.backgroundBox.TabIndex = 19;
 			this.backgroundBox.TabStop = false;
 			this.backgroundBox.Text = "";
+			this.backgroundBox.Enter += new System.EventHandler(this.ShiftFocus);
 			// 
 			// FormMain
 			// 
@@ -279,10 +280,10 @@
 			this.Controls.Add(this.btnCreate);
 			this.Controls.Add(this.btnBlogTitle);
 			this.Controls.Add(this.backgroundBox);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "FormMain";
 			this.Padding = new System.Windows.Forms.Padding(20, 20, 0, 0);
-			this.Text = "Tant Nordhs Bloggverktyg";
+			this.Text = " ";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

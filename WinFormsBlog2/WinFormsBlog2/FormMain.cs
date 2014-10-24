@@ -62,11 +62,9 @@ namespace WinFormsBlog2
 
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
-			ConcealExtras();
-
 			if (comboBoxSearch.SelectedIndex == 0)
 			{
-				txtSearch.Text = "Du har inte valt sökmetod.";
+				txtSearch.Text = "Du har inte valt sökmetod";
 			}
 			else if (comboBoxSearch.SelectedIndex == 1)
 			{
@@ -160,8 +158,11 @@ namespace WinFormsBlog2
 
 		private void PrintSearchResult(List<Post> foundPosts)
 		{
+			ConcealExtras();
+
 			if (foundPosts.Count == 0)
 			{
+				mainBox.Clear();
 				string text = "Din sökning gav ingen träff.";
 				text.PrintBodyText(mainBox);
 				ConcealButtons();
@@ -217,8 +218,11 @@ namespace WinFormsBlog2
 		{
 			mainBox.Clear();
 			txtTitle.Visible = true;
+			txtTitle.Text = _postManager.SelectedPost.Title;
 			txtBodyText.Visible = true;
+			txtBodyText.Text = _postManager.SelectedPost.Text;
 			txtTags.Visible = true;
+			txtTags.Text = _postManager.GetTags(_postManager.SelectedPost);
 			btnEdit.Visible = false;
 			btnSaveChanges.Visible = true;
 		}
