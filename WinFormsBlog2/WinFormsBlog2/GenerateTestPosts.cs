@@ -22,7 +22,7 @@ namespace WinFormsBlog2
 			}
 		}
 
-		private static Post CreateTestPost(int number)
+		private static void CreateTestPost(int number)
 		{
 			string title = "Testrubrik " + (number + 1);
 			string text = "Testinlägg " + (number + 1) + " med en massa text hit och dit.";
@@ -33,8 +33,6 @@ namespace WinFormsBlog2
 
 			_postManager.CreatePost(title, text, tags);
 			_postManager.Posts[number].Comments.Add(_commentManager.CreateComment(commentName, commentText));
-
-			return _postManager.Posts[number];
 		}
 
 	}

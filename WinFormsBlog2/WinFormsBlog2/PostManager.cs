@@ -22,6 +22,7 @@ namespace WinFormsBlog2
 				post.Tags = new List<string>(tags.Split(','));
 
 			Posts.Add(post);
+			SelectedPost = post;
 
 			_id++;
 		}
@@ -40,7 +41,7 @@ namespace WinFormsBlog2
 			post.Title.PrintTitle(richTextBox1);
 			post.Text.PrintBodyText(richTextBox1);
 			info.PrintPostInfo(richTextBox1);
-			PrintComments(post, richTextBox1);
+			PrintComments(post, richTextBox1); 
 		}
 
 		private void PrintComments(Post post, RichTextBox richTextBox)
@@ -98,12 +99,12 @@ namespace WinFormsBlog2
 		}
 		
 
-		public void PrintAllPosts(RichTextBox richTextBox1)
+		public void PrintPosts(RichTextBox richTextBox1, List<Post> posts)
 		{
-			for (int i = 0; i < Posts.Count; i++)
+			for (int i = 0; i < posts.Count; i++)
 			{
-				Posts[i].Title.PrintTitle(richTextBox1);
-				Posts[i].Text.PrintBodyText(richTextBox1);
+				posts[i].Title.PrintTitle(richTextBox1);
+				posts[i].Text.PrintBodyText(richTextBox1);
 				richTextBox1.AppendText(Environment.NewLine);
 			}
 		}
