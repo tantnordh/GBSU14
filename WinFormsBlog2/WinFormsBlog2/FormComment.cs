@@ -28,5 +28,10 @@ namespace WinFormsBlog2
 			_post.Comments.Add(_commentManager.CreateComment(txtName.Text, txtComment.Text));
 			this.Close();
 		}
+
+		private void btnBack_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

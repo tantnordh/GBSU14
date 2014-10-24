@@ -53,12 +53,13 @@ namespace WinFormsBlog2
 				string info = SetCommentInfo(orderedComments[i]);
 				info.PrintPostInfo(richTextBox);
 				orderedComments[i].Text.PrintBodyText(richTextBox);
+				richTextBox.AppendText(Environment.NewLine);
 			}
 		}
 
 		private string SetCommentInfo(Comment comment)
 		{
-			return comment.Id + ". Datum: " + comment.Date.ToShortDateString() + " | Namn: " + comment.Name;
+			return "Datum: " + comment.Date.ToShortDateString() + " | Namn: " + comment.Name;
 		}
 
 		private static string SetPostInfo(Post post, string tags)

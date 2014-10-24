@@ -58,12 +58,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNewPost.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormNewPost.Designer.cs">
-      <DependentUpon>FormNewPost.cs</DependentUpon>
-    </Compile>
     <Compile Include="GenerateTestPosts.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostManager.cs" />
@@ -76,9 +70,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormNewPost.resx">
-      <DependentUpon>FormNewPost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
