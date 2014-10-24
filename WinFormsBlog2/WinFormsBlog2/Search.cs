@@ -20,7 +20,7 @@ namespace WinFormsBlog2
 
 		public static List<Post> SearchByTag(this List<Post> posts, string tag)
 		{
-			return posts.Where(p => p.Tags.Contains(tag)).ToList();
+			return posts.Where(p => p.Tags.Any(t => t.Contains(tag))).ToList();
 		}
 	}
 }
