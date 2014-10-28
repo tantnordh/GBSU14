@@ -19,6 +19,8 @@ namespace ConsoleVersion
 			post.Text.PrintBodyText();
 			info.PrintPostInfo();
 			PrintComments(post);
+
+			BackToMainAnyKey();
 		}
 
 		public void PrintComments(Post post)
@@ -51,6 +53,8 @@ namespace ConsoleVersion
 				posts[i].Text.PrintBodyText();
 				Console.WriteLine();
 			}
+
+			SelectPost(posts);
 		}
 
 		public void PrintTitles(List<Post> posts)
@@ -61,6 +65,65 @@ namespace ConsoleVersion
 				titlePlusNumber = "(" + (i + 1) + ") " + posts[i].Title;
 				titlePlusNumber.PrintBodyText();
 			}
+
+			SelectPost(posts);
+		}
+
+		public void PrintSearchResult(List<Post> posts)
+		{
+
+			if (posts.Count == 0)
+			{
+				Console.Clear();
+				string header = "Sökresultat";
+				string text = "Din sökning gav inget resultat.";
+				header.PrintHeader();
+				Console.WriteLine();
+				text.PrintBodyText();
+
+				BackToMainAnyKey();
+			}
+			else if (posts.Count == 1)
+			{
+				PrintSinglePost(posts[0]);
+			}
+			else
+			{
+				PrintPosts(posts);
+			}
+		}
+
+		private void SelectPost(List<Post> posts)
+		{
+			BackToMainMenuZero();
+			string instruction = "Ange ditt val som ett heltal 0 - " + posts.Count + ": ";
+			Console.WriteLine();
+			instruction.PrintInstruction();
+
+			int choice;
+			while (!int.TryParse(Console.ReadLine(), out choice) || choice < 0 | choice > posts.Count)
+			{
+				instruction.PrintInstruction();
+			}
+
+			if (choice != 0)
+			{
+				PrintSinglePost(posts[choice - 1]);
+			}
+		}
+
+		private static void BackToMainMenuZero()
+		{
+			Console.WriteLine();
+			string quit = "(0) Gå till huvudmenyn";
+			quit.PrintBodyText();
+		}
+
+		private static void BackToMainAnyKey()
+		{
+			string instruction = "Tryck på valfri tangent för att återgå till huvudmenyn.";
+			instruction.PrintInstruction();
+			Console.ReadKey();
 		}
 	}
 }

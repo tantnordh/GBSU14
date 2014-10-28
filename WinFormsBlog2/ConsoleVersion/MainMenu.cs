@@ -21,9 +21,9 @@ namespace ConsoleVersion
 			{
 				ShowMainMenu();
 				HandleMenuChoice(GetMenuChoice());
-				string instruction = "Tryck på valfri tangent för att återgå till huvudmenyn.";
-				instruction.PrintInstruction();
-				Console.ReadKey();
+				//string instruction = "Tryck på valfri tangent för att återgå till huvudmenyn.";
+				//instruction.PrintInstruction();
+				//Console.ReadKey();
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace ConsoleVersion
 					header.PrintHeader();
 					Console.WriteLine();
 
-					PrintSearchResult(_postManager.Posts.SearchByTitle(GetPostTitle()));
+					_postManager.PrintSearchResult(_postManager.Posts.SearchByTitle(GetPostTitle()));
 					break;
 
 				case 5:
@@ -100,7 +100,7 @@ namespace ConsoleVersion
 					header.PrintHeader();
 					Console.WriteLine();
 
-					PrintSearchResult(_postManager.Posts.SearchByDate(GetDate()));
+					_postManager.PrintSearchResult(_postManager.Posts.SearchByDate(GetDate()));
 					break;
 
 				case 6:
@@ -108,34 +108,12 @@ namespace ConsoleVersion
 					header.PrintHeader();
 					Console.WriteLine();
 
-					PrintSearchResult(_postManager.Posts.SearchByTag(GetTag()));
+					_postManager.PrintSearchResult(_postManager.Posts.SearchByTag(GetTag()));
 					break;
 
 				case 0:
 					Environment.Exit(0);
 					break;
-			}
-		}
-
-		private static void PrintSearchResult(List<Post> posts)
-		{
-			
-			if (posts.Count == 0)
-			{
-				Console.Clear();
-				string header = "Sökresultat";
-				string text = "Din sökning gav inget resultat.";
-				header.PrintHeader();
-				Console.WriteLine();
-				text.PrintBodyText();
-			}
-			else if (posts.Count == 1)
-			{
-				_postManager.PrintSinglePost(posts[0]);
-			}
-			else
-			{
-				_postManager.PrintPosts(posts);
 			}
 		}
 
