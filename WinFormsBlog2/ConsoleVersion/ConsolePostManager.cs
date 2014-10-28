@@ -11,13 +11,14 @@ namespace ConsoleVersion
 	{
 		public void PrintSinglePost(Post post)
 		{
+			Console.Clear();
 			string tags = GetTags(post);
 			string info = SetPostInfo(post, tags);
 
 			post.Title.PrintTitle();
 			post.Text.PrintBodyText();
 			info.PrintPostInfo();
-			PrintComments(post); 
+			PrintComments(post);
 		}
 
 		public void PrintComments(Post post)
@@ -41,9 +42,11 @@ namespace ConsoleVersion
 
 		public void PrintPosts(List<Post> posts)
 		{
+			string titlePlusNumber;
 			for (int i = 0; i < posts.Count; i++)
 			{
-				posts[i].Title.PrintTitle();
+				titlePlusNumber = "(" + (i+1) + ") " + posts[i].Title;
+				titlePlusNumber.PrintTitle();
 				posts[i].Text.PrintBodyText();
 				Console.WriteLine();
 			}

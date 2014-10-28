@@ -12,7 +12,7 @@ namespace WinFormsVersion
 	{
 		public static void PrintTitle(this string text, RichTextBox richTextBox)
 		{
-			richTextBox.SelectionFont = new Font("Sitka Heading", 24f, FontStyle.Regular);
+			richTextBox.SelectionFont = new Font("Bookman Old Style", 24f, FontStyle.Regular);
 			richTextBox.SelectionColor = Color.DarkMagenta;
 			richTextBox.AppendText(text);
 			richTextBox.AppendText(Environment.NewLine);
@@ -20,7 +20,7 @@ namespace WinFormsVersion
 
 		public static void PrintSubTitle(this string text, RichTextBox richTextBox)
 		{
-			richTextBox.SelectionFont = new Font("Sitka Heading", 14f, FontStyle.Regular);
+			richTextBox.SelectionFont = new Font("Arial", 14f, FontStyle.Regular);
 			richTextBox.SelectionColor = Color.DarkMagenta;
 			richTextBox.AppendText(text);
 			richTextBox.AppendText(Environment.NewLine);
@@ -28,7 +28,7 @@ namespace WinFormsVersion
 
 		public static void PrintBodyText(this string text, RichTextBox richTextBox)
 		{
-			richTextBox.SelectionFont = new Font("Helvetica", 11f, FontStyle.Regular);
+			richTextBox.SelectionFont = new Font("Arial", 11f, FontStyle.Regular);
 			richTextBox.SelectionColor = Color.Gray;
 			richTextBox.AppendText(text);
 			richTextBox.AppendText(Environment.NewLine);
@@ -36,7 +36,7 @@ namespace WinFormsVersion
 
 		public static void PrintPostInfo(this string text, RichTextBox richTextBox)
 		{
-			richTextBox.SelectionFont = new Font("Sitka Small", 11f, FontStyle.Regular);
+			richTextBox.SelectionFont = new Font("Arial", 11f, FontStyle.Regular);
 			richTextBox.SelectionColor = Color.Goldenrod;
 			richTextBox.AppendText(text);
 			richTextBox.AppendText(Environment.NewLine);

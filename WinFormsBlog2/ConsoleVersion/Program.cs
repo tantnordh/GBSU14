@@ -10,6 +10,8 @@ namespace ConsoleVersion
 	{
 		static void Main(string[] args)
 		{
+			Console.BackgroundColor = ConsoleColor.White;
+			MainMenu.Run();
 		}
 	}
 }

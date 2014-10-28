@@ -12,7 +12,7 @@ namespace ConsoleVersion
 		public static void PrintTitle(this string text)
 		{
 			Console.ForegroundColor = ConsoleColor.DarkMagenta;
-			Console.WriteLine(text);
+			Console.WriteLine(text.ToUpper());
 			Console.WriteLine();
 		}
 
@@ -25,7 +25,7 @@ namespace ConsoleVersion
 
 		public static void PrintBodyText(this string text)
 		{
-			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.ForegroundColor = ConsoleColor.DarkGray;
 			Console.WriteLine(text);
 			Console.WriteLine();
 		}
@@ -35,6 +35,14 @@ namespace ConsoleVersion
 			Console.ForegroundColor = ConsoleColor.DarkYellow;
 			Console.WriteLine(text);
 			Console.WriteLine();
+		}
+
+		public static void PrintInstruction(this string text)
+		{
+			Console.ForegroundColor = ConsoleColor.DarkGreen;
+			Console.WriteLine();
+			Console.WriteLine(text);
+			Console.ForegroundColor = ConsoleColor.DarkGray;
 		}
 	}
 }

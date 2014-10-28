@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassesInCommon
 {
-	public abstract class PostManager
+	public class PostManager
 	{
 		private static int _id;
 
@@ -62,16 +62,16 @@ namespace ClassesInCommon
 			return tags;
 		}
 
-		public PostManager()
-		{
-			_id = 1;
-			Posts = new List<Post>();
-		}
-
 		public void DeletePost()
 		{
 			Posts = Posts.Where(p => p != SelectedPost).ToList();
 			SelectedPost = null;
+		}
+
+		public PostManager()
+		{
+			_id = 1;
+			Posts = new List<Post>();
 		}
 	}
 }
