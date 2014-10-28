@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassesInCommon
-
+{
 	public static class GenerateTestPosts
 	{
 		private static PostManager _postManager;

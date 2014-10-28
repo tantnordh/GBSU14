@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClassesInCommon
+namespace WinFormsVersion
 {
-	public static class TextColours
+	public static class WFTextColours
 	{
 		public static void PrintTitle(this string text, RichTextBox richTextBox)
 		{

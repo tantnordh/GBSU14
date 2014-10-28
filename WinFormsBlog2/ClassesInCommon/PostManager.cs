@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ClassesInCommon
 {
-	public class PostManager
+	public abstract class PostManager
 	{
 		private static int _id;
 
@@ -27,42 +26,12 @@ namespace ClassesInCommon
 			_id++;
 		}
 
-		public void PrintSinglePost(RichTextBox richTextBox1, Post post)
-		{
-			string tags = GetTags(post);
-			string info = SetPostInfo(post, tags);
-
-			post.Title.PrintTitle(richTextBox1);
-			post.Text.PrintBodyText(richTextBox1);
-			info.PrintPostInfo(richTextBox1);
-			PrintComments(post, richTextBox1); 
-		}
-
-		private void PrintComments(Post post, RichTextBox richTextBox)
-		{
-			string comments = "Kommentarer (" + post.Comments.Count + ")";
-			if (post.Comments.Count > 0)
-			{
-				richTextBox.AppendText(Environment.NewLine);
-				comments.PrintSubTitle(richTextBox);
-			}
-
-			List<Comment> orderedComments = post.Comments.OrderByDescending(p => p.Date).ToList();
-			for (int i = 0; i < orderedComments.Count; i++)
-			{
-				string info = SetCommentInfo(orderedComments[i]);
-				info.PrintPostInfo(richTextBox);
-				orderedComments[i].Text.PrintBodyText(richTextBox);
-				richTextBox.AppendText(Environment.NewLine);
-			}
-		}
-
-		private string SetCommentInfo(Comment comment)
+		public string SetCommentInfo(Comment comment)
 		{
 			return "Datum: " + comment.Date.ToShortDateString() + " | Namn: " + comment.Name;
 		}
 
-		private static string SetPostInfo(Post post, string tags)
+		public string SetPostInfo(Post post, string tags)
 		{
 			string info;
 			if (tags != string.Empty)
@@ -91,16 +60,6 @@ namespace ClassesInCommon
 				}
 			}
 			return tags;
-		}
-
-		public void PrintPosts(RichTextBox richTextBox1, List<Post> posts)
-		{
-			for (int i = 0; i < posts.Count; i++)
-			{
-				posts[i].Title.PrintTitle(richTextBox1);
-				posts[i].Text.PrintBodyText(richTextBox1);
-				richTextBox1.AppendText(Environment.NewLine);
-			}
 		}
 
 		public PostManager()

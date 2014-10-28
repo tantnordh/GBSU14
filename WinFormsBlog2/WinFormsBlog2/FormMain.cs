@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassesInCommon;
 
 namespace WinFormsVersion
 {
 	public partial class FormMain : Form
 	{
-		private static PostManager _postManager;
+		private static WFPostManager _postManager;
 		private static CommentManager _commentManager;
 
 		public FormMain()
 		{
 			InitializeComponent();
 
-			_postManager = new PostManager();
+			_postManager = new WFPostManager();
 			_commentManager = new CommentManager();
 			GenerateTestPosts.GetPosts(3, _postManager, _commentManager);
 
