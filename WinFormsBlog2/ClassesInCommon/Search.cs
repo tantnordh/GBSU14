@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsBlog2
+namespace ClassesInCommon
 {
 	public static class Search
 	{

@@ -1,4 +1,4 @@
-﻿namespace WinFormsBlog2
+﻿namespace WinFormsVersion
 {
 	partial class FormMain
 	{

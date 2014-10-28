@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinFormsBlog2
+namespace WinFormsVersion
 {
 	public partial class FormComment : Form
 	{

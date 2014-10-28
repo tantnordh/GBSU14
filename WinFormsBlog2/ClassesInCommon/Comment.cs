@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WinFormsBlog2
+namespace WinFormsVersion
 {
 	public class Comment
 	{
