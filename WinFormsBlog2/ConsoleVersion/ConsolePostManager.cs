@@ -42,6 +42,7 @@ namespace ConsoleVersion
 
 		public void PrintPosts(List<Post> posts)
 		{
+			Console.Clear();
 			string titlePlusNumber;
 			for (int i = 0; i < posts.Count; i++)
 			{
@@ -49,6 +50,16 @@ namespace ConsoleVersion
 				titlePlusNumber.PrintTitle();
 				posts[i].Text.PrintBodyText();
 				Console.WriteLine();
+			}
+		}
+
+		public void PrintTitles(List<Post> posts)
+		{
+			string titlePlusNumber;
+			for (int i = 0; i < posts.Count; i++)
+			{
+				titlePlusNumber = "(" + (i + 1) + ") " + posts[i].Title;
+				titlePlusNumber.PrintBodyText();
 			}
 		}
 	}
