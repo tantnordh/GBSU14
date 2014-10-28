@@ -72,7 +72,7 @@ namespace ConsoleVersion
 		public void PrintSearchResult(List<Post> posts)
 		{
 
-			if (posts.Count == 0)
+			if (!posts.Any())
 			{
 				Console.Clear();
 				string header = "Sökresultat";
