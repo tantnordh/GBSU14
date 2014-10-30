@@ -10,24 +10,46 @@ namespace EventOchDelegater
 	{
 		static void Main(string[] args)
 		{
-			var testLista = new List<int>();
-			testLista.Where(IsEven);
+			//var testLista = new List<int>();
+			//testLista.Where(IsEven);
 
 			//Runtime program = new Runtime();
 			//program.MinMetodVariabel(25);
 
-			EventRun program = new EventRun();
-			program.MyEvent += delegate()
-			{
-				Console.WriteLine("Anonymt svar på eventet.");
-			};
-			program.MyEvent += OnEventStarted;
-			program.NumberEvent += OnNumberEvent;
-			program.EventWithArgs += program_EventWithArgs;
+			//EventRun program = new EventRun();
+			//program.MyEvent += delegate()
+			//{
+			//	Console.WriteLine("Anonymt svar på eventet.");
+			//};
+			//program.MyEvent += OnEventStarted;
+			//program.NumberEvent += OnNumberEvent;
+			//program.EventWithArgs += program_EventWithArgs;
 			
-			program.SkrivSaker();
-			
+			//program.SkrivSaker();
+
+			EventRunTwo program = new EventRunTwo();
+			program.KingsNamingEvent += OnKingsNamingEvent;
+			program.PrintThings();
+
 			Console.ReadLine();
+		}
+
+		private static void OnKingsNamingEvent(string name, int number)
+		{
+			string suffix;
+			if (number == 1)
+			{
+				suffix = "st";
+			}
+			else if (number == 2)
+			{
+				suffix = "nd";
+			}
+			else
+			{
+				suffix = "th";
+			}
+			Console.WriteLine(name + " the " + number + suffix);
 		}
 
 		private static void program_EventWithArgs(object sender, string eventArgs)
