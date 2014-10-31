@@ -21,9 +21,6 @@ namespace ConsoleVersion
 			{
 				ShowMainMenu();
 				HandleMenuChoice(GetMenuChoice());
-				//string instruction = "Tryck på valfri tangent för att återgå till huvudmenyn.";
-				//instruction.PrintInstruction();
-				//Console.ReadKey();
 			}
 		}
 
