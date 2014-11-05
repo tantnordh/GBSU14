@@ -14,6 +14,7 @@ namespace Inloggningsruta2
 	{
 		private static User _currentUser;
 		private static UserManager _userManager;
+		private static User _selectedUser;
 
 		public UserForm(UserManager userManager, User currentUser)
 		{
@@ -30,7 +31,8 @@ namespace Inloggningsruta2
 				UserIsNotAdmin();
 			}
 
-			LoadUserList();
+			userList.DataSource = _userManager.Users;
+			userList.DisplayMember = "Username";
 		}
 
 		private void UserIsNotAdmin()
@@ -53,37 +55,34 @@ namespace Inloggningsruta2
 
 		private void userList_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			_userManager.SelectedUser = (User)userList.SelectedItem;
-
-			userInfoBox.Clear();
-			userInfoBox.AppendText("First name: " + _userManager.SelectedUser.FirstName);
-			userInfoBox.AppendText("\nSurname: " + _userManager.SelectedUser.SurName);
-			userInfoBox.AppendText("\nAge: " + _userManager.SelectedUser.Age.ToString());
-			userInfoBox.AppendText("\nBlocked: " + _userManager.SelectedUser.LockedAccount.ToString());
+			_selectedUser = (User)userList.SelectedItem;
+			LoadUserInfo();
 		}
 
 		private void blockBtn_Click(object sender, EventArgs e)
 		{
-			_userManager.SelectedUser.LockedAccount = true;
+			_selectedUser.LockedAccount = true;
+			LoadUserInfo();
 		}
 
 		private void unblockBtn_Click(object sender, EventArgs e)
 		{
-			_userManager.SelectedUser.LockedAccount = false;
+			_selectedUser.LockedAccount = false;
+			LoadUserInfo();
 		}
 
 		private void deleteBtn_Click(object sender, EventArgs e)
 		{
-			_userManager.DeleteUser(_userManager.SelectedUser);
-			userInfoBox.Clear();
-			LoadUserList();
+			_userManager.DeleteUser(_selectedUser);
 		}
 
-		private void LoadUserList()
+		private void LoadUserInfo()
 		{
-			userList.DataSource = null;
-			userList.DataSource = _userManager.Users;
-			userList.DisplayMember = "Username";
+			userInfoBox.Clear();
+			userInfoBox.AppendText("First name: " + _selectedUser.FirstName);
+			userInfoBox.AppendText("\nSurname: " + _selectedUser.SurName);
+			userInfoBox.AppendText("\nAge: " + _selectedUser.Age.ToString());
+			userInfoBox.AppendText("\nBlocked: " + _selectedUser.LockedAccount.ToString());
 		}
 	}
 }
