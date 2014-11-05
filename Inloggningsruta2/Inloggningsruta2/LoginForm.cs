@@ -12,7 +12,7 @@ namespace Inloggningsruta2
 {
 	public partial class LoginForm : Form
 	{
-		private static UserManager _userManager = new UserManager();
+		private static UserManager _userManager;
 		private static User _user;
 		
 		public event Action LoginAction;
@@ -21,8 +21,8 @@ namespace Inloggningsruta2
 		{
 			InitializeComponent();
 
-			CreateMockUsers.Admin(_userManager);
-			CreateMockUsers.Users(_userManager, 3);
+			_userManager = new UserManager();
+			CreateMockUsers.AdminAndUsers(_userManager, 5);
 		}
 
 		private void clearBtn_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace Inloggningsruta2
 
 			if (passwordIsValid)
 			{
-				var userForm = new UserForm(_userManager);
+				var userForm = new UserForm(_userManager, _user);
 				userForm.ShowDialog();
 			}
 		}

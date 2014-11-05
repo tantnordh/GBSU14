@@ -12,20 +12,78 @@ namespace Inloggningsruta2
 {
 	public partial class UserForm : Form
 	{
+		private static User _currentUser;
 		private static List<User> _users;
+		private static User _selectedUser;
 
-		public UserForm(UserManager userManager)
+		public UserForm(UserManager userManager, User currentUser)
 		{
 			InitializeComponent();
-			_users = userManager.Users.OrderBy(u => u.Username).ToList();
+			_currentUser = currentUser;
+			_users = userManager.Users;
+
+			if (currentUser.Admin)
+			{
+				UserIsAdmin();
+			}
+			else
+			{
+				UserIsNotAdmin();
+			}
+
+			ResetUserList();
+		}
+
+		private void ResetUserList()
+		{
+			userList.DataSource = null;
 			userList.DataSource = _users;
 			userList.DisplayMember = "Username";
 		}
 
-		private void ShowUserInfo(object sender, EventArgs e)
+		private void UserIsNotAdmin()
 		{
-			nameLbl.Text = "First name: " + _users.SingleOrDefault(u => u.Username == userList.SelectedValue.ToString()).FirstName;
+			this.Width = 260;
+			blockBtn.Visible = false;
+			unblockBtn.Visible = false;
+			deleteBtn.Visible = false;
+			userInfoBox.Height = 186;
 		}
+		private void UserIsAdmin()
+		{
+			this.Width = 445;
+			blockBtn.Visible = true;
+			unblockBtn.Visible = true;
+			deleteBtn.Visible = true;
+			userInfoBox.Height = 99;
+		}
+
+		private void userList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_selectedUser = (User)userList.SelectedItem;
+
+			userInfoBox.Clear();
+			userInfoBox.AppendText("First name: " + _selectedUser.FirstName);
+			userInfoBox.AppendText("\nSurname: " + _selectedUser.SurName);
+			userInfoBox.AppendText("\nAge: " + _selectedUser.Age.ToString());
+		}
+
+		private void blockBtn_Click(object sender, EventArgs e)
+		{
+			_selectedUser.LockedAccount = true;
+		}
+
+		private void unblockBtn_Click(object sender, EventArgs e)
+		{
+			_selectedUser.LockedAccount = false;
+		}
+
+		private void deleteBtn_Click(object sender, EventArgs e)
+		{
+			_users = _users.Where(u => u != _selectedUser).ToList();
+			ResetUserList();
+		}
+
 
 	}
 }
