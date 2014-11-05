@@ -9,18 +9,22 @@ namespace Inloggningsruta2
 	public class UserManager
 	{
 		public List<User> Users { get; set; }
+		public User SelectedUser { get; set; }
 
 		public void CreateUser(string username, string password)
 		{
 			Users.Add(new User(username, password));
 		}
 
+		public void DeleteUser(User user)
+		{
+			Users.Remove(user);
+			SelectedUser = null;
+		}
+
 		public UserManager()
 		{
 			Users = new List<User>();
 		}
-
-
-
 	}
 }

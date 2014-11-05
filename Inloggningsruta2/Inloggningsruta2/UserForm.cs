@@ -13,14 +13,13 @@ namespace Inloggningsruta2
 	public partial class UserForm : Form
 	{
 		private static User _currentUser;
-		private static List<User> _users;
-		private static User _selectedUser;
+		private static UserManager _userManager;
 
 		public UserForm(UserManager userManager, User currentUser)
 		{
 			InitializeComponent();
+			_userManager = userManager;
 			_currentUser = currentUser;
-			_users = userManager.Users;
 
 			if (currentUser.Admin)
 			{
@@ -31,14 +30,7 @@ namespace Inloggningsruta2
 				UserIsNotAdmin();
 			}
 
-			ResetUserList();
-		}
-
-		private void ResetUserList()
-		{
-			userList.DataSource = null;
-			userList.DataSource = _users;
-			userList.DisplayMember = "Username";
+			LoadUserList();
 		}
 
 		private void UserIsNotAdmin()
@@ -49,6 +41,7 @@ namespace Inloggningsruta2
 			deleteBtn.Visible = false;
 			userInfoBox.Height = 186;
 		}
+
 		private void UserIsAdmin()
 		{
 			this.Width = 445;
@@ -60,30 +53,37 @@ namespace Inloggningsruta2
 
 		private void userList_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			_selectedUser = (User)userList.SelectedItem;
+			_userManager.SelectedUser = (User)userList.SelectedItem;
 
 			userInfoBox.Clear();
-			userInfoBox.AppendText("First name: " + _selectedUser.FirstName);
-			userInfoBox.AppendText("\nSurname: " + _selectedUser.SurName);
-			userInfoBox.AppendText("\nAge: " + _selectedUser.Age.ToString());
+			userInfoBox.AppendText("First name: " + _userManager.SelectedUser.FirstName);
+			userInfoBox.AppendText("\nSurname: " + _userManager.SelectedUser.SurName);
+			userInfoBox.AppendText("\nAge: " + _userManager.SelectedUser.Age.ToString());
+			userInfoBox.AppendText("\nBlocked: " + _userManager.SelectedUser.LockedAccount.ToString());
 		}
 
 		private void blockBtn_Click(object sender, EventArgs e)
 		{
-			_selectedUser.LockedAccount = true;
+			_userManager.SelectedUser.LockedAccount = true;
 		}
 
 		private void unblockBtn_Click(object sender, EventArgs e)
 		{
-			_selectedUser.LockedAccount = false;
+			_userManager.SelectedUser.LockedAccount = false;
 		}
 
 		private void deleteBtn_Click(object sender, EventArgs e)
 		{
-			_users = _users.Where(u => u != _selectedUser).ToList();
-			ResetUserList();
+			_userManager.DeleteUser(_userManager.SelectedUser);
+			userInfoBox.Clear();
+			LoadUserList();
 		}
 
-
+		private void LoadUserList()
+		{
+			userList.DataSource = null;
+			userList.DataSource = _userManager.Users;
+			userList.DisplayMember = "Username";
+		}
 	}
 }
